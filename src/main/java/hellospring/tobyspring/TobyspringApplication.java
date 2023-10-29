@@ -19,6 +19,7 @@ public class TobyspringApplication {
     public static void main(String[] args) {
         ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
         WebServer webServer = serverFactory.getWebServer(servletContext -> {
+            HelloController helloController = new HelloController();
             servletContext.addServlet("frontcontroller", new HttpServlet() {
                 @Override
                 public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -29,9 +30,13 @@ public class TobyspringApplication {
                     if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
                         String name = req.getParameter("name");
 
+                        //메소드를 호출할 때 인자값으로 넘겨주는 작업을 바인딩이라고 한다
+                        //dto로 데이터를 넘기는 것도 바인딩이라고 한다(사실은 이것보단느 복잡하다)
+                        String ret = helloController.hello(name);   //바인딩
+
                         resp.setStatus(HttpStatus.OK.value());
                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
-                        resp.getWriter().println("Hello " + name);
+                        resp.getWriter().println(ret);
                     } else if (req.getRequestURI().equals("/uesr")) {
 
                     } else {
