@@ -4,6 +4,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -18,17 +19,26 @@ public class TobyspringApplication {
     public static void main(String[] args) {
         ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
         WebServer webServer = serverFactory.getWebServer(servletContext -> {
-            servletContext.addServlet("hello", new HttpServlet() {
+            servletContext.addServlet("frontcontroller", new HttpServlet() {
                 @Override
                 public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                    //쳐청을 할 때 파라미터가 있다면 그 파라미터를 변수로 사용할 것이다
-                    String name = req.getParameter("name");
+                    //인증, 보안, 다국어, 공통 기능을 모두 구현했다고 가정함
+                    //기존에는 URL을 매칭해서 Servlet Container가 Servlet에게 요청을 위임했다.
+                    //이제는 그 역할을 이 프론트 컨트롤러에서 해줄 수 있어야 한다
 
-                    resp.setStatus(HttpStatus.OK.value());                                       //상태 코드
-                    resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);  //헤더
-                    resp.getWriter().println("hello" + name);                //바디
+                    if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
+                        String name = req.getParameter("name");
+
+                        resp.setStatus(HttpStatus.OK.value());
+                        resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
+                        resp.getWriter().println("Hello " + name);
+                    } else if (req.getRequestURI().equals("/uesr")) {
+
+                    } else {
+                        resp.setStatus(HttpStatus.NOT_FOUND.value());
+                    }
                 }
-            }).addMapping("/hello");
+            }).addMapping("/*");    //모든 url을 여기서 처리할 것이다
         });
         webServer.start();
     }
