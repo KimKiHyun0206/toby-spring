@@ -3,6 +3,7 @@ package hellospring.tobyspring;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServer;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
+import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -17,9 +18,14 @@ import java.io.IOException;
 public class TobyspringApplication {
 
     public static void main(String[] args) {
+        GenericApplicationContext applicationContext = new GenericApplicationContext();
+        applicationContext.registerBean(HelloController.class);
+        applicationContext.registerBean(SimpleHelloService.class);
+        applicationContext.refresh();
+
+
         ServletWebServerFactory serverFactory = new TomcatServletWebServerFactory();
         WebServer webServer = serverFactory.getWebServer(servletContext -> {
-            HelloController helloController = new HelloController();
             servletContext.addServlet("frontcontroller", new HttpServlet() {
                 @Override
                 public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,9 +36,8 @@ public class TobyspringApplication {
                     if (req.getRequestURI().equals("/hello") && req.getMethod().equals(HttpMethod.GET.name())) {
                         String name = req.getParameter("name");
 
-                        //메소드를 호출할 때 인자값으로 넘겨주는 작업을 바인딩이라고 한다
-                        //dto로 데이터를 넘기는 것도 바인딩이라고 한다(사실은 이것보단느 복잡하다)
-                        String ret = helloController.hello(name);   //바인딩
+                        HelloController helloController = applicationContext.getBean(HelloController.class);
+                        String ret = helloController.hello(name);
 
                         resp.setStatus(HttpStatus.OK.value());
                         resp.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE);
