@@ -8,6 +8,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 
 public class TobyspringApplication {
+    //연결
 
     public static void main(String[] args) {
         GenericWebApplicationContext applicationContext = new GenericWebApplicationContext();   //dispactherServlet 때문에 변경함
