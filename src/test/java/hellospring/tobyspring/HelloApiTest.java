@@ -1,5 +1,6 @@
 package hellospring.tobyspring;
 
+import org.apache.coyote.Response;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -29,5 +30,15 @@ public class HelloApiTest {
         Assertions.assertThat(response.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
         //body Hello Spring
         Assertions.assertThat(response.getBody()).isEqualTo("Hello Spring");
+    }
+
+    @Test
+    void failHelloApiTest(){
+        TestRestTemplate rest = new TestRestTemplate();
+
+        ResponseEntity<String> response =
+                rest.getForEntity("http://localhost:8080/hello?name=", String.class);
+
+        Assertions.assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

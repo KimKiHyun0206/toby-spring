@@ -9,18 +9,18 @@ import java.util.Objects;
 @RestController
 public class HelloController {
     private final HelloService helloService;
-    private final ApplicationContext applicationContext;
 
-    public HelloController(HelloService helloService, ApplicationContext applicationContext) {
+    public HelloController(HelloService helloService) {
         this.helloService = helloService;
-        this.applicationContext = applicationContext;
     }
 
     @GetMapping("/hello")
     //@ResponseBody   //String이 리턴되면 view로 받아들이기 때문에 ~~.html 파일을 반환하지 않아도 되도록 해주는 애노테이션
     //@RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(String name) {
-        return helloService.sayHello(Objects.requireNonNull(name));
+        if (name == null || name.trim().length() == 0) throw new IllegalArgumentException();
+        return helloService.sayHello(name);
+        //return helloService.sayHello(Objects.requireNonNull(name));
     }
 
     /*  implements ApplicationContextAware
