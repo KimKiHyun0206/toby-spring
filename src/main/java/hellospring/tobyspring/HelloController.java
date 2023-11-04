@@ -19,6 +19,7 @@ public class HelloController {
     //@RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String hello(String name) {
         if (name == null || name.trim().length() == 0) throw new IllegalArgumentException();
+
         return helloService.sayHello(name);
         //return helloService.sayHello(Objects.requireNonNull(name));
     }

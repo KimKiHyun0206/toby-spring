@@ -29,7 +29,7 @@ public class HelloApiTest {
         //header(content-type) test/plain
         Assertions.assertThat(response.getHeaders().getFirst(HttpHeaders.CONTENT_TYPE)).startsWith(MediaType.TEXT_PLAIN_VALUE);
         //body Hello Spring
-        Assertions.assertThat(response.getBody()).isEqualTo("Hello Spring");
+        Assertions.assertThat(response.getBody()).isEqualTo("* Hello Spring *");
     }
 
     @Test
