@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 public class HelloApiTest {
 
     @Test
-    void helloApi() {
+    void helloApi() {   //Spring을 실행해야 제대로 테스트가 진행됨
         //http localhost:8080/hello?name=Spring
         //Httpie 라고 부르기를 개발자들이 요청한다(터미널)
 
