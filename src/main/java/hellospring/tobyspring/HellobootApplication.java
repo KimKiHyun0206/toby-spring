@@ -1,5 +1,6 @@
 package hellospring.tobyspring;
 
+import hellospring.tobyspring.config.MySpringBootAnnotation;
 import org.springframework.boot.SpringApplication;
 
 @MySpringBootAnnotation

@@ -1,4 +1,4 @@
-package hellospring.tobyspring;
+package hellospring.tobyspring.config;
 
 import hellospring.tobyspring.config.EnableMyAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
