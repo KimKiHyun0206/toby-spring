@@ -2,7 +2,7 @@ package hellospring.tobyspring;
 
 import org.springframework.boot.SpringApplication;
 
-@SpringBootAnnotation
+@MySpringBootAnnotation
 public class HellobootApplication {
 
     public static void main(String[] args) {

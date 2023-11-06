@@ -1,5 +1,6 @@
 package hellospring.tobyspring;
 
+import hellospring.tobyspring.config.EnableMyAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,5 +13,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Configuration
 @ComponentScan
-public @interface SpringBootAnnotation {
+@EnableMyAutoConfiguration  //구성 정보에 클래스 정보 넘겨서 추가하기
+public @interface MySpringBootAnnotation {
 }
