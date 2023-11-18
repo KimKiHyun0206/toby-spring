@@ -1,4 +1,4 @@
-package hellospring.tobyspring;
+package hellospring.tobyspring.helloboot;
 
 public interface HelloService {
     String sayHello(String name);

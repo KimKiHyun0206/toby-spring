@@ -1,7 +1,7 @@
 package hellospring.tobyspring;
 
+import hellospring.tobyspring.helloboot.HelloController;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 public class HelloControllerTest {
