@@ -1,6 +1,7 @@
-package hellospring.tobyspring.config.autoconfig;
+package hellospring.tobyspring.no_use;
 
 import hellospring.tobyspring.config.MyAutoConfiguration;
+import hellospring.tobyspring.config.autoconfig.ServerProperties;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
