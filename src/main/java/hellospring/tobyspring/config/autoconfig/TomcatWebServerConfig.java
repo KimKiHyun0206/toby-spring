@@ -19,6 +19,9 @@ public class TomcatWebServerConfig {
     @Bean(name = "tomcatWebServerFactory")
     @ConditionalOnMissingBean
     public ServletWebServerFactory servletWebServerFactory() {
-        return new TomcatServletWebServerFactory();
+        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+        factory.setContextPath("/app");
+        return factory;
+
     }
 }
