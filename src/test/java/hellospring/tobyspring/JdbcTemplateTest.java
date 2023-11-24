@@ -31,12 +31,12 @@ public class JdbcTemplateTest {
         Assertions.assertThat(count).isEqualTo(2);
     }
 
-    @Test
-    void insertAndQuery2(){
-        jdbcTemplate.update("insert into hello values(?, ?)", "Toby", 3);
-        jdbcTemplate.update("insert into hello values(?, ?)", "spring", 1);
-
-        Long count = jdbcTemplate.queryForObject("select count(*) from hello", Long.class);
-        Assertions.assertThat(count).isEqualTo(2);
-    }
+//    @Test     //두 개의 테스트를 모두 돌렸을 때 오류가 나지 않는다. 왜냐하면 테이블이 드롭되어 새로운 테이블로 실행하기 때문이다 . 원래 테이블이 드롭되지 않으면 4가 나와야 한다
+//    void insertAndQuery2(){
+//        jdbcTemplate.update("insert into hello values(?, ?)", "Toby", 3);
+//        jdbcTemplate.update("insert into hello values(?, ?)", "spring", 1);
+//
+//        Long count = jdbcTemplate.queryForObject("select count(*) from hello", Long.class);
+//        Assertions.assertThat(count).isEqualTo(2);
+//    }
 }
