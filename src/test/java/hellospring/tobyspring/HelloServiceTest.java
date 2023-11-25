@@ -1,9 +1,12 @@
 package hellospring.tobyspring;
 
+import hellospring.tobyspring.helloboot.Hello;
 import hellospring.tobyspring.helloboot.HelloDecorator;
+import hellospring.tobyspring.helloboot.HelloRepository;
 import hellospring.tobyspring.helloboot.SimpleHelloService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -29,12 +32,24 @@ public class HelloServiceTest {
 
     @Test
     void simpleHelloServiceTest(){
-        SimpleHelloService helloService = new SimpleHelloService();
+        SimpleHelloService helloService = new SimpleHelloService(helloRepositoryStub);
 
         String response = helloService.sayHello("Test");
 
         Assertions.assertThat(response).isEqualTo("Hello Test");
     }
+
+    private static HelloRepository helloRepositoryStub = new HelloRepository() {
+        @Override
+        public Hello findHello(String name) {
+            return null;
+        }
+
+        @Override
+        public void increaseCount(String name) {
+
+        }
+    };
 
     @Test
     void helloDecorator(){

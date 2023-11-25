@@ -21,6 +21,12 @@ public class HelloController {
         //return helloService.sayHello(Objects.requireNonNull(name));
     }
 
+
+    @GetMapping("/count")
+    public String hello2(String name) {
+        return name + " : " + helloService.countOf(name);
+    }
+
     /*  implements ApplicationContextAware
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
