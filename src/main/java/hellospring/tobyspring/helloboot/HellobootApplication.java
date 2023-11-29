@@ -1,22 +1,35 @@
 package hellospring.tobyspring.helloboot;
 
-import hellospring.tobyspring.config.MySpringBootAnnotation;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionEvaluationReport;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.annotation.PostConstruct;
 
-@MySpringBootAnnotation
+@SpringBootApplication
 public class HellobootApplication {
-    /*@Bean
-    ApplicationRunner applicationRunner(Environment environment) {
-        return args -> {
-            String name = environment.getProperty("my.name");
-            System.out.println("my.name : " + name);
-        };
-    }*/
-
     private final JdbcTemplate jdbcTemplate;
+//    자동 구성 조건 결과 확인하는 것
+//    @Bean
+//    ApplicationRunner run(ConditionEvaluationReport report){
+//        return args -> {
+//            System.out.println(
+//                    report.getConditionAndOutcomesBySource().entrySet().stream()
+//                            .filter(co -> co.getValue().isFullMatch())
+//                            .filter(co -> co.getKey().indexOf("Jmx") < 0)
+//                            .map(co->{
+//                                co.getValue().forEach(c ->{
+//                                    System.out.println("\t"+c.getOutcome());
+//                                });
+//                                System.out.println();
+//                                return co;
+//                            }).count()
+//            );
+//        };
+//    }
 
     public HellobootApplication(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -30,8 +43,4 @@ public class HellobootApplication {
     public static void main(String[] args) {
         SpringApplication.run(HellobootApplication.class, args);
     }
-
-//    public static void main(String[] args) {    //처음 스프링부트가 만들어준 코드와 같다 -> 지금까지 한 게 스프링부트가 스프링 코드를 만들어주는 방법이다
-//        MySpringApplication.run(HellobootApplication.class, args);
-//    }
 }

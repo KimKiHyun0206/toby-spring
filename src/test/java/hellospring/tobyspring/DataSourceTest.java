@@ -1,13 +1,9 @@
 package hellospring.tobyspring;
 
-import hellospring.tobyspring.helloboot.HellobootApplication;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -26,7 +22,9 @@ import java.sql.SQLException;
  * Classpath를 지정해줘서 야기서 읽어오라고 지정해준 것이다
 */
 
-@HellobootTest
+
+
+@JdbcTest
 public class DataSourceTest {
     @Autowired
     DataSource dataSource;
